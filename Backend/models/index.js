@@ -15,5 +15,6 @@ datenbank.sequelize = sequelize;
 
 datenbank.mitarbeiter = require("../models/mitarbeiter.js")(sequelize, Sequelize);
 datenbank.repos = require("../models/repo.js")(sequelize, Sequelize);
+datenbank.language = require("../models/language.js")(sequelize, Sequelize);
 
 module.exports = datenbank;

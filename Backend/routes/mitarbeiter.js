@@ -5,4 +5,6 @@ module.exports = app => {
 
     // Finde alle Mitarbeiter
     router.get("/mitarbeiter", service.findAllMitarbeiter);
+
+    app.use('/', router);
 };

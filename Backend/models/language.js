@@ -1,23 +1,29 @@
 module.exports = (sequelize, Sequelize) => {
-    const Repo = sequelize.define("Repo", {
+    const Repo = sequelize.define("Programmiersprache", {
         id: {
             type: Sequelize.INTEGER,
             autoIncrement: true,
             primaryKey: true,
         },
-        name: {
+        sprache: {
             type: Sequelize.STRING(100)
         },
-        ersteller: {
+        mitarbeiter: {
             type: Sequelize.INTEGER,
             allowNull: true,
             references: {
                 model: "Mitarbeiters",
                 key: "id"
             }
+        },
+        repo: {
+            type: Sequelize.INTEGER,
+            allowNull: true,
+            references: {
+                model: "Repos",
+                key: "id"
+            }
         }
 
     });
-
-    return Repo;
-};
+}

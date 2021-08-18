@@ -6,6 +6,8 @@ const app = express();
 const Datenbank = require("./models");
 const Mitarbeiter = Datenbank.mitarbeiter;
 
+const service = require("./controllers/service");
+
 const fetch = require('node-fetch');
 const headers = {
     "authorization": "token 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"
@@ -24,14 +26,14 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-// simple route
+// Test a simple route and give message back
 app.get("/", (req, res) => {
     res.json({ message: "Server is running" });
 });
 
 const datenbank = require("./models");
 datenbank.sequelize.sync();
-require("./app/routes/mitarbeiter")(app);
+//require("./routes/mitarbeiter")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
@@ -39,19 +41,8 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 });
 
-//Get Mitarbeiter from API
-fetch(url, { method: 'GET', headers: headers })
-    .then((res) => {
-        return res.json()
-    })
-    .then((data) => {
-        data.forEach(element => {
-            let mitarbeiter = {
-                name: element.login
-            };
-            Mitarbeiter.create(mitarbeiter)
-        });
-    });
+
+service.setMitarbeiter();
 
 
 
